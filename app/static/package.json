@@ -1,0 +1,26 @@
+{
+  "name": "static",
+  "version": "1.0.0",
+  "description": "Number-type agnostic calculator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carawarner/calculator-demo.git"
+  },
+  "keywords": [
+    "calculator",
+    "python"
+  ],
+  "author": "Cara Warner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/carawarner/calculator-demo/issues"
+  },
+  "homepage": "https://github.com/carawarner/calculator-demo#readme",
+  "devDependencies": {
+    "webpack": "^4.10.2"
+  }
+}

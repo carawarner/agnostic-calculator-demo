@@ -1,4 +1,5 @@
 *.pyc
 __pycache__
 app/venv
+app/static/node_modules
 .DS_Store
