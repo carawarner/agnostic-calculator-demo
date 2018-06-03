@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { CalculatorForm } from "../components/CalculatorForm";
 import { CalculatorResult } from "../components/CalculatorResult";
 
@@ -15,18 +16,6 @@ export default class CalculatorContainer extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentWillMount() {
-    console.log("Will mount");
-  }
-
-  componentDidMount() {
-    console.log("Did mount");
-  }
-
-  componentWillRender() {
-    console.log("Will render");
-  }
-
   handleChange(e) {
     // There's only one field now but there may be more in the future
     let target = e.target;
@@ -35,12 +24,21 @@ export default class CalculatorContainer extends React.Component {
     });
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault();
-    // Return a random number until API is hooked up
-    this.setState({
-      result: Math.floor(Math.random() * Math.floor(1000)).toString()
-    });
+
+    const jsonData = {
+      expression: this.state.expression
+    };
+
+    try {
+      const response = await axios.post("/api/evaluate", jsonData);
+      this.setState({
+        result: response.data.result
+      });
+    } catch (error) {
+      //Do something
+    }
   }
 
   render() {
