@@ -40,14 +40,34 @@ RUN source $NVM_DIR/nvm.sh \
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
-# Dockerfile To Do List:
-#
-# Install requirements.txt
-# Install packages.json
-# Copy upstart conf to /etc/init
-# Copy nginx conf to /etc/sites-available
-# Copy the application code into /var/www/calculator
-# Run npm build
-# Enable the site (copy conf to sites-enabled)
-# Reload nginx
-# Expose the calculator on port 80
+ENV APP_DIR /var/www/calculator/app
+
+# Install Python dependencies
+COPY ./app/server/requirements.txt $APP_DIR/server/requirements.txt
+RUN pip3 install -r $APP_DIR/server/requirements.txt
+
+# Install JS dependencies
+COPY ./app/static/package.json $APP_DIR/static/package.json
+WORKDIR $APP_DIR/static
+RUN npm install
+
+# Copy application code (most likely to change, so should be run last)
+COPY ./app/server/__init__.py $APP_DIR/server/__init__.py
+COPY ./app/server/main.py $APP_DIR/server/main.py
+COPY ./app/static $APP_DIR/static
+
+# Build
+RUN npm run build
+
+# TODO: move these up to above dependency installation since they'll almost never change
+# (Putting them lower down for now b/c I'm testing them, which means lots of building)
+COPY ./resources/etc/init/calculator.conf /etc/init/calculator.conf
+COPY ./resources/etc/nginx/sites-available/calculator /etc/nginx/sites-available/calculator
+
+# Run
+RUN service uwsgi start
+COPY ./resources/etc/nginx/sites-available/calculator /etc/nginx/sites-enabled/calculator
+RUN service nginx reload
+EXPOSE 80
+
+# TODO: what about log directories?
