@@ -9,10 +9,11 @@ MAINTAINER Cara Warner
 
 RUN echo 'Installing apt dependencies'
 RUN apt-get update && apt-get install -y nginx \
-    uwsgi \
     build-essential \
+    uwsgi \
+    uwsgi-plugin-python \
     python3 \
-    python-dev\
+    python3-dev\
     python3-pip \
     vim \
     curl \
@@ -63,11 +64,15 @@ RUN npm run build
 # (Putting them lower down for now b/c I'm testing them, which means lots of building)
 COPY ./resources/etc/init/calculator.conf /etc/init/calculator.conf
 COPY ./resources/etc/nginx/sites-available/calculator /etc/nginx/sites-available/calculator
+COPY ./app/server/calculator.ini /etc/uwsgi/apps-available/calculator.ini
 
 # Run
-RUN service uwsgi start
+COPY ./app/server/calculator.ini /etc/uwsgi/apps-enabled/calculator.ini
+# RUN service uwsgi start
 COPY ./resources/etc/nginx/sites-available/calculator /etc/nginx/sites-enabled/calculator
-RUN service nginx reload
-EXPOSE 80
+RUN rm /etc/nginx/sites-enabled/default
+# RUN service nginx start
+
+EXPOSE 80 443
 
 # TODO: what about log directories?

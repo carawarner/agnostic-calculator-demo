@@ -2,8 +2,11 @@ server {
     listen 80;
     server_name server_domain_or_IP;
 
+    access_log /var/log/nginx/calculator_access.log;
+    error_log /var/log/nginx/calculator_error.log;
+
     location / {
         include uwsgi_params;
-        uwsgi_pass unix:/home/user/calculator/calculator.sock;
+        uwsgi_pass unix:/run/uwsgi/calculator.sock;
     }
 }
