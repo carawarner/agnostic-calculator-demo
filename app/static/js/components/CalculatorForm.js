@@ -2,7 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export const CalculatorForm = props => (
-  <form className="calculator-form" onSubmit={props.onSubmit}>
+  <form
+    className="calculator-form"
+    onSubmit={props.onSubmit}
+    autoComplete="off"
+  >
     <input
       type="text"
       placeholder=""

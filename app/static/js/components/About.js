@@ -1,6 +1,6 @@
 import React from "react";
 
-export const About = props => (
+export const About = () => (
   <div className="text-is-centered">
     <h1 className="title">Type-Agnostic Calculator</h1>
 
