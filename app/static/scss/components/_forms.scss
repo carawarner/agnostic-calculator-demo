@@ -1,0 +1,27 @@
+.calculator-form {
+  input,
+  select {
+    background-color: inherit;
+    border: none;
+    border-bottom: 1px solid $light-gray-color;
+    box-sizing: border-box;
+    width: 100%;
+    height: 36px;
+    outline: none;
+    padding: 1px;
+    &:focus {
+      border-bottom: 1px solid $yellow-color;
+    }
+    &:focus + label {
+      color: $yellow-color;
+      font-weight: 700;
+    }
+  }
+  select {
+    border-radius: 0px;
+    -webkit-appearance: none;
+  }
+  label {
+    font-size: 13px;
+  }
+}
