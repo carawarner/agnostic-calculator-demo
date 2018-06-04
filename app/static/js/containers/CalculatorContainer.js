@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { About } from "../components/About";
 import { CalculatorForm } from "../components/CalculatorForm";
 import { CalculatorResult } from "../components/CalculatorResult";
 
@@ -42,9 +43,9 @@ export default class CalculatorContainer extends React.Component {
   }
 
   render() {
-    console.log("Rendering...");
     return (
-      <div>
+      <div className="text-is-centered">
+        <About />
         <CalculatorForm
           expression={this.state.expression}
           onChange={this.handleChange}
