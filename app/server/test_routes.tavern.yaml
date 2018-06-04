@@ -1,0 +1,36 @@
+test_name: Test /api/evlauate
+
+stages:
+  - name: Returns a 200 if passed an expression
+    request:
+      url: http://localhost:5000/api/evaluate
+      json:
+        expression: "I+I"
+      method: POST
+      headers:
+        content-type: application/json
+    response:
+      status_code: 200
+      body:
+        result: "II"
+
+  - name: Returns a 400 if not passed an expression
+    request:
+      url: http://localhost:5000/api/evaluate
+      method: POST
+      headers:
+        content-type: application/json
+    response:
+      status_code: 400
+
+test_name: Test index
+
+stages:
+  - name: Returns a 200
+    request:
+      url: http://localhost:5000/
+      method: GET
+      headers:
+        content-type: application/json
+    response:
+      status_code: 200
