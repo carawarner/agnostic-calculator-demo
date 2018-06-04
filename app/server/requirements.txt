@@ -1,0 +1,3 @@
+Flask==0.12.2
+agnostic-calculator==1.0.0
+tavern==0.10.0
