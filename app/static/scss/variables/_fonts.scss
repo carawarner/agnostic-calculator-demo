@@ -1,0 +1,147 @@
+%base-text {
+  color: $darkest-gray-color;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-size: 14px;
+  line-height: 1.4em;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+%heading-text {
+  color: $darkest-gray-color;
+  font-family: "Roboto Slab", "Times New Roman", serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1em;
+}
+
+.italic {
+  font-style: italic;
+}
+.bold {
+  font-weight: 700;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  @extend %heading-text;
+}
+.h1 {
+  font-size: 240%;
+}
+.h2 {
+  font-size: 200%;
+}
+.h3 {
+  font-size: 160%;
+}
+.h4 {
+  font-size: 130%;
+}
+.h5 {
+  font-size: 100%;
+}
+.h6 {
+  font-size: 100%;
+}
+
+.block-margins {
+  margin: 1em 0;
+}
+
+.unordered-list {
+  list-style-type: disc;
+}
+.ordered-list {
+  list-style: decimal;
+}
+.link {
+  color: $yellow-color;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:visited {
+    color: $yellow-color;
+  }
+
+  &:hover,
+  &:visited:hover {
+    color: saturate($yellow-color, 10%);
+    text-decoration: underline;
+  }
+}
+
+.typography {
+  a {
+    @extend .link;
+  }
+
+  i,
+  em {
+    @extend .italic;
+  }
+  b,
+  strong {
+    @extend .bold;
+  }
+
+  h1,
+  .h1 {
+    @extend .h1;
+    margin: 1em 0 1em;
+  }
+  h2,
+  .h2 {
+    @extend .h2;
+    margin: 1.5em 0 0.5em;
+  }
+  h3,
+  .h3 {
+    @extend .h3;
+    margin: 1.5em 0 0.5em;
+  }
+  h4,
+  .h4 {
+    @extend .h4;
+    margin: 2em 0 0.5em;
+  }
+  h5,
+  .h5 {
+    @extend .h5;
+    margin: 2em 0 0.5em;
+  }
+  h6,
+  .h6 {
+    @extend .h6;
+    margin: 2em 0 0.5em;
+  }
+
+  p,
+  ul,
+  ol,
+  pre {
+    @extend .block-margins;
+  }
+
+  ul {
+    @extend .unordered-list;
+  }
+  ol {
+    @extend .ordered-list;
+  }
+
+  label {
+    margin-top: 20px;
+    color: $light-gray-color;
+  }
+
+  input,
+  textarea,
+  select {
+    @extend %base-text;
+  }
+}

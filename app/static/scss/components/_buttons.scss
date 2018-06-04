@@ -1,0 +1,23 @@
+.calculator-button {
+  border: none;
+  background-color: $yellow-color;
+  color: $white-color;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  line-height: 40px;
+  margin: 10px;
+  padding: 0 30px;
+  text-transform: uppercase;
+  &:disabled {
+    background-color: $dark-gray-color;
+  }
+  &:hover:enabled {
+    background-color: saturate($yellow-color, 10%);
+  }
+  &:focus {
+    outline: none;
+    background-color: saturate($yellow-color, 10%);
+  }
+}
