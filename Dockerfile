@@ -10,16 +10,25 @@ MAINTAINER Cara Warner
 RUN echo 'Installing apt dependencies'
 RUN apt-get update && apt-get install -y nginx \
     build-essential \
-    uwsgi \
-    uwsgi-plugin-python \
     python3 \
     python3-dev\
     python3-pip \
+    uwsgi \
+    uwsgi-src \
+    uuid-dev \
+    libcap-dev \
+    libpcre3-dev \
     vim \
     curl \
  && apt-get clean \
  && apt-get autoremove \
  && rm -rf /var/lib/apt/lists/*
+
+# Set up uwsgi
+WORKDIR ~
+RUN PYTHON=python3.6 uwsgi --build-plugin "/usr/src/uwsgi/plugins/python python36"
+RUN mv python36_plugin.so /usr/lib/uwsgi/plugins/python36_plugin.so
+RUN chmod 644 /usr/lib/uwsgi/plugins/python36_plugin.so
 
 # replace shell with bash so we can source files
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
@@ -67,9 +76,9 @@ COPY ./resources/etc/nginx/sites-available/calculator /etc/nginx/sites-available
 COPY ./app/server/calculator.ini /etc/uwsgi/apps-available/calculator.ini
 
 # Run
-COPY ./app/server/calculator.ini /etc/uwsgi/apps-enabled/calculator.ini
+RUN ln -s /etc/uwsgi/apps-available/calculator.ini /etc/uwsgi/apps-enabled/calculator.ini
 # RUN service uwsgi start
-COPY ./resources/etc/nginx/sites-available/calculator /etc/nginx/sites-enabled/calculator
+RUN ln -s /etc/nginx/sites-available/calculator /etc/nginx/sites-enabled/calculator
 RUN rm /etc/nginx/sites-enabled/default
 # RUN service nginx start
 
