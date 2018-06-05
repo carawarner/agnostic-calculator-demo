@@ -1,7 +1,7 @@
 *.pyc
 __pycache__
 .pytest_cache
-app/venv
+app/server/venv
 app/static/dist
 app/static/node_modules
 .DS_Store
