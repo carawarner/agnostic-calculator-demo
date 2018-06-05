@@ -9,6 +9,7 @@ This full-stack app showcases the [Agnostic Calculator](https://github.com/caraw
 ## How to install
 
 _With Docker_:
+
 `service uwsgi start` is going to fail. The app still runs. It's a [known issue](https://github.com/carawarner/agnostic-calculator-demo/issues/16).
 ```
 sudo docker pull carawarner/calculator-demo:latest
