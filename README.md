@@ -29,6 +29,15 @@ pip install -r requirements.txt
 cd agnostic-calculator-demo/app/static
 npm install
 ```
+If you installed manually, you can run the app locally by doing...
+```
+cd agnostic-calculator-demo/app/static
+npm build
+cd agnostic-calculator-demo/app/server
+source venv/bin/activate
+export FLASK_APP=main.py
+flask run
+```
 
 ## How to run tests
 
